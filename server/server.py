@@ -1,26 +1,21 @@
 from socket import *
 
-HOST = 'localhost'  
-PORT = 50001   
+HOST = '10.0.0.18'  
+PORT = 50000
 
 class Server():
 
     def __init__(self):
-        self.sock = socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.bind((HOST, PORT))  
-        self.sock_listen()  
+        self.buff_size = 1024
+        self.sock = socket(AF_INET, SOCK_DGRAM)
+        self.sock.bind((HOST, PORT))
+        self.sock_listen()
         
     def sock_listen(self):
-        self.sock.listen(10)
         while True:
-            client, addr = server.accept()
-            print('Connected by: ', addr)
-            self.handle_client(client)
+            data, addr = self.sock.recvfrom(self.buff_size)
+            print('received: {0} from {1}'.format(data, addr))
+            if data:
+                self.sock.close()
 
-    def handle_client(self, client):
-        data = client.recv(1024)
-
-        client.send(data)
-
-    def create_torrent(self, file_name):
-        pass
+Server()
