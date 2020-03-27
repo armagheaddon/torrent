@@ -16,7 +16,7 @@ namespace TorrentClient
         private UdpClient client;
         private byte[] bytes = new byte[1024];  // Data buffer for incoming data. 
 
-        //private Queue<Dictionary<string, dynamic>> incoming = new Queue<Dictionary<string, dynamic>>();
+        //private Queue<> incoming = new Queue<Dictionary<string, dynamic>>();
         //private Thread receiveLoop;
 
         public Client()
@@ -50,8 +50,8 @@ namespace TorrentClient
             try
             {
                 byte[] receiveBytes = client.Receive(ref RemoteIpEndPoint);
-                string received = Encoding.ASCII.GetString(receiveBytes);
-                return (RemoteIpEndPoint.Address.ToString(), RemoteIpEndPoint.Port, received);
+                string receivedMsg = Encoding.ASCII.GetString(receiveBytes);
+                return (RemoteIpEndPoint.Address.ToString(), RemoteIpEndPoint.Port, receivedMsg);
             }
             catch (Exception e)
             {
@@ -78,5 +78,31 @@ namespace TorrentClient
                 return;
             }
         }
+
+        //public void ReceiveLoop()
+        //{
+        //    string data;
+        //    while (client.Connected)
+        //    {
+        //        data = ReceiveToString();
+        //        if (data == "")
+        //            break;
+        //        else
+        //            TakeAPart(data);
+        //    }
+        //    incoming.Enqueue(null);
+        //    CloseSocket();
+        //}
+
+        //public string GetIncoming()
+        //{
+        //    while (incoming.Count() == 0)
+        //    {
+        //        DoNothing();
+        //    }
+        //    var msg = incoming.Dequeue();
+        //    Console.WriteLine("incoming: " + msg);
+        //    return msg;
+        //}
     }
 }
