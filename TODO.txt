@@ -1,0 +1,9 @@
+TODO LIST
+
+SERVER
+- add database
+- add thread with commands
+- 
+
+CLIENT
+- 
